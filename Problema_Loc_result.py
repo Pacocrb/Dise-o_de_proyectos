@@ -7,7 +7,7 @@ from fcn_plot_ciudades_hub import plot_ciudades_hub
 from fcn_heat_map import heat_map
 from fcn_plot_clientes_depot import plot_clientes_depot
 from fcn_VRP_barrido import VRP_barrido
-from math import atan2, degrees
+from fcn_VRP_NN import VRP_vecino
 
 '''Problema de localización'''
 # Cargar datos desde el archivo Excel
@@ -43,10 +43,12 @@ data = df.parse(sheet_name="Sheet1")
 plot_clientes_depot(data, x_hub, y_hub)
 
 # Generar demanda de las tiendas, actualizar a valores reales
-data['Demanda'] = np.random.randint(4, 10, size=len(data))
+data['Demanda'] = np.random.randint(4, 8, size=len(data))
 # Definir coordenadas del depósito
 deposito = {'Nombre': 'Depósito', 'Longitude': x_hub, 'Latitude': y_hub}
+capacidad_vehiculo = 50
 
-VRP_barrido(data, deposito, y_hub, x_hub)
+VRP_barrido(data, deposito, y_hub, x_hub, capacidad_vehiculo)
+VRP_vecino(data, deposito, y_hub, x_hub, capacidad_vehiculo)
 
 print('Fin del codigo')

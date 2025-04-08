@@ -2,7 +2,7 @@ import folium
 import numpy as np
 from math import atan2, degrees
 
-def VRP_barrido(data, deposito, y_hub, x_hub):
+def VRP_barrido(data, deposito, y_hub, x_hub, capacidad_vehiculo):
     # Calcular distancia y ángulo polar desde el depósito
     def calcular_angulo(long1, lat1, long2, lat2):
         delta_x = long2 - long1
@@ -18,7 +18,6 @@ def VRP_barrido(data, deposito, y_hub, x_hub):
     data = data.sort_values(by='Ángulo')
 
     # Agrupar por capacidad del vehículo
-    capacidad_vehiculo = 50
     rutas = []
     ruta_actual = []
     carga_actual = 0
@@ -42,9 +41,9 @@ def VRP_barrido(data, deposito, y_hub, x_hub):
         ruta_actual.append(deposito['Nombre'])
         rutas.append(ruta_actual)
 
-    # Mostrar rutas generadas
-    for i, ruta in enumerate(rutas, start=1):
-        print(f"Ruta {i}: {ruta}")
+    # # Mostrar rutas generadas
+    # for i, ruta in enumerate(rutas, start=1):
+    #     print(f"Ruta {i}: {ruta}")
 
     mapa = folium.Map(location=[deposito['Latitude'], deposito['Longitude']], zoom_start=12)
 
