@@ -1,7 +1,12 @@
+'''Resolución del problema de localización por medio de un método matematico visto
+en clase'''
+
+
 from scipy.optimize import minimize
 import numpy as np
+import pandas as pd
 '''Método de localización'''
-def fcn_localizacion(a, b, w):
+def fcn_localizacion(a,b,w):
     # Función a minimizar
     def weighted_distance(params):
         x, y = params
